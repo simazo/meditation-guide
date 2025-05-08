@@ -3,7 +3,7 @@ import { TAGS } from '../constants/tags';
 export const questions = [
   {
     id: 1,
-    text: "この1ヶ月を振り返って、ストレスを感じることが多かったですか？",
+    text: "最近はストレスを感じることが多いですか？",
     tags: [TAGS['ストレス軽減'], TAGS['心の平穏'], TAGS['ポジティブエネルギー']]
   },
   {
@@ -18,7 +18,7 @@ export const questions = [
   },
   {
     id: 4,
-    text: "深く考えすぎて疲れたことがありますか？",
+    text: "深く考えすぎて疲れがちですか？",
     tags: [TAGS['自己認識向上'], TAGS['ストレス軽減']]
   },
   {
@@ -94,7 +94,7 @@ export const questions = [
   {
     id: 19,
     text: "忙しいときでも、楽しみを見つける余裕を持っていますか？",
-    tags: [TAGS['楽しみ増進'], TAGS['身体リフレッシュ']]
+    tags: [TAGS['楽しみ増進']]
   },
   {
     id: 20,

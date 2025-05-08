@@ -11,15 +11,9 @@ const App: React.FC = () => {
     recommendation,
   } = useQuestion();
 
-  // const onAnswer = (questionId: number, answer: boolean) => {
-  //   answerQuestion(questionId, answer);
-  //   if(isLastQuestion) calcRecommendation(answers);
-  // };
-  // 
-  // 回答が終わってから集計結果を計算するよう、同期を取るためuseEffectに変更
   useEffect(() => {
     if (isLastQuestion) {
-      calcRecommendation(answers);
+      calcRecommendation();
     }
   }, [isLastQuestion, answers, calcRecommendation]);
 
