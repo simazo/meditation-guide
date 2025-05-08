@@ -1,9 +1,9 @@
 import { renderHook, act } from "@testing-library/react";
 import { useQuestion } from "../hooks/useQuestion";
-import { questions } from "../data/questions";
+import { questions } from "../../data/questions";
 
 // モックデータ
-jest.mock("../data/questions", () => ({
+jest.mock("../../data/questions", () => ({
   questions: [
     { id: 1, text: "質問1", tags: ["集中", "リラックス", "姿勢"] },
     { id: 2, text: "質問2", tags: ["集中", "リラックス"] },
@@ -18,7 +18,6 @@ describe("useQuestion", () => {
     const { result } = renderHook(() => useQuestion());
     expect(result.current.currentQuestion).toEqual(questions[0]);
     expect(result.current.isLastQuestion).toBe(false);
-    expect(result.current.answers).toEqual({});
     expect(result.current.recommendation).toBeNull();
   });
 
@@ -29,7 +28,6 @@ describe("useQuestion", () => {
       result.current.answerQuestion(1, true);
     });
 
-    expect(result.current.answers).toEqual({ 1: true });
     expect(result.current.currentQuestion).toEqual(questions[1]);
   });
 

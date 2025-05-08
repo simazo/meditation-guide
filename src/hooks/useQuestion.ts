@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { questions } from "../data/questions";
+import { questions } from "../../data/questions";
+import type { Question } from "../types/question";
+import type { UseQuestionResult } from "../types/useQuestionResult";
 
 type AnswerMap = Record<number, boolean>; // 回答結果を保持するマップ
 type TagCountMap = Record<string, number>; // タグごとの出現回数を集計したマップ
 type SortedTagList = [string, number][]; // 出現回数順にソートされたタグのリスト
 
-export const useQuestion = () => {
+export const useQuestion = (): UseQuestionResult => {
   const [answers, setAnswers] = useState<AnswerMap>({});
   const [recommendation, setRecommendation] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const isLastQuestion = questions.length > 0 && currentIndex === questions.length; // 空配列対応
+  const currentQuestion: Question | undefined = questions[currentIndex];
 
   const answerQuestion = (questionId: number, answer: boolean) => {
     setAnswers(prevAnswers => {
@@ -35,14 +38,11 @@ export const useQuestion = () => {
     setRecommendation(result);
   };
 
-  const currentQuestion = questions[currentIndex];
-
   return {
     currentQuestion,
     answerQuestion,
     calcRecommendation,
     isLastQuestion,
-    answers,
     recommendation,
     nextQuestion,
   };

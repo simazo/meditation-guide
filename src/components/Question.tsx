@@ -1,5 +1,3 @@
-import React from "react";
-
 const Question: React.FC<{
   text: string;
   onAnswer: (answer: boolean) => void;

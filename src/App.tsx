@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { useQuestion } from "../hooks/useQuestion";
+import { useQuestion } from "./hooks/useQuestion";
 import Question from "./components/Question";
 import Recommendation from "./components/Recommendation";
 import Progress from "./components/Progress";
+import type { UseQuestionResult } from "./types/useQuestionResult";
 
 const App: React.FC = () => {
   const { 
@@ -10,15 +11,14 @@ const App: React.FC = () => {
     answerQuestion, 
     calcRecommendation,
     isLastQuestion,
-    answers,
     recommendation,
-  } = useQuestion();
+  }: UseQuestionResult = useQuestion();
 
   useEffect(() => {
     if (isLastQuestion) {
       calcRecommendation();
     }
-  }, [isLastQuestion, answers, calcRecommendation]);
+  }, [isLastQuestion, calcRecommendation]);
 
   const onAnswer = (questionId: number, answer: boolean) => {
     answerQuestion(questionId, answer);
@@ -26,7 +26,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      { <h1>瞑想法診断</h1>}
+      <h1>瞑想法診断</h1>
       { <Progress current={currentQuestion?.id || 0} total={20} /> }
       {currentQuestion ? (
         <Question 

@@ -1,7 +1,7 @@
 import { countTags, sortTagsByCount, createRecommendation } from "../hooks/useQuestion";
 
 // モックデータ
-jest.mock("../data/questions", () => ({
+jest.mock("../../data/questions", () => ({
   questions: [
     { id: 1, text: "質問1", tags: ["集中", "姿勢"] },
     { id: 2, text: "質問2", tags: ["集中"] },

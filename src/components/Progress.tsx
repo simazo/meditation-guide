@@ -1,9 +1,4 @@
-import React from "react";
-
-interface ProgressProps {
-  current: number;
-  total: number;
-}
+import type {ProgressProps} from "../types/progress";
 
 const Progress: React.FC<ProgressProps> = ({ current, total }) => {
   return (

@@ -1,6 +1,7 @@
-import { TAGS } from '../constants/tags';
+import { TAGS } from '../src/constants/tags';
+import type { Question } from "../src/types/question";
 
-export const questions = [
+export const questions: Question[] = [
   {
     id: 1,
     text: "最近はストレスを感じることが多いですか？",
