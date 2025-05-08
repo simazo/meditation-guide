@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { useQuestion } from "../hooks/useQuestion";
+import Question from "./components/Question";
+import Recommendation from "./components/Recommendation";
+import Progress from "./components/Progress";
 
 const App: React.FC = () => {
   const { 
@@ -23,19 +26,15 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {/* <h1>瞑想法診断</h1> */}
+      { <h1>瞑想法診断</h1>}
+      { <Progress current={currentQuestion?.id || 0} total={20} /> }
       {currentQuestion ? (
-      <div>
-        <p>{currentQuestion.text}</p>
-        <button onClick={() => onAnswer(currentQuestion.id, true)}>はい</button>
-        <button onClick={() => onAnswer(currentQuestion.id, false)}>いいえ</button>
-      </div>
+        <Question 
+          text={currentQuestion.text} 
+          onAnswer={(answer) => onAnswer(currentQuestion.id, answer)} 
+        />
       ) : (
-        recommendation ? (
-          <h2>{recommendation}</h2> // 推奨結果が存在すれば表示
-        ) : (
-          <h2>結果を計算中...</h2> // 結果がまだ出ていない場合
-        )
+        <Recommendation recommendation={recommendation} />
       )}
     </div>
   );
