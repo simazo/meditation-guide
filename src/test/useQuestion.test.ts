@@ -1,6 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import { useQuestion } from "../hooks/useQuestion";
 import { questions } from "../../data/questions";
+import { MEDITATION_DETAILS } from "../constants/meditationDetails";
 
 // モックデータ
 jest.mock("../../data/questions", () => ({
@@ -48,6 +49,10 @@ describe("useQuestion", () => {
       result.current.calcRecommendation();
     });
 
-    expect(result.current.recommendation).toBe("おすすめの瞑想法は: 集中, リラックス, 姿勢");
+    expect(result.current.recommendation).toEqual([
+      MEDITATION_DETAILS["集中"],
+      MEDITATION_DETAILS["リラックス"],
+      MEDITATION_DETAILS["姿勢"],
+    ]);
   });
 });

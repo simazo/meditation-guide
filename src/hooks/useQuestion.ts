@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { questions } from "../../data/questions";
 import type { Question } from "../types/question";
-import type { UseQuestionResult } from "../types/useQuestionResult";
+import type { MeditationDetail, UseQuestionResult } from "../types/useQuestionResult";
+import { MEDITATION_DETAILS } from "../constants/meditationDetails";
 
 type AnswerMap = Record<number, boolean>; // 回答結果を保持するマップ
 type TagCountMap = Record<string, number>; // タグごとの出現回数を集計したマップ
@@ -9,7 +10,7 @@ type SortedTagList = [string, number][]; // 出現回数順にソートされた
 
 export const useQuestion = (): UseQuestionResult => {
   const [answers, setAnswers] = useState<AnswerMap>({});
-  const [recommendation, setRecommendation] = useState<string | null>(null);
+  const [recommendation, setRecommendation] = useState<MeditationDetail[] | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const isLastQuestion = questions.length > 0 && currentIndex === questions.length; // 空配列対応
   const currentQuestion: Question | undefined = questions[currentIndex];
@@ -63,11 +64,19 @@ export const sortTagsByCount = (tagCount: TagCountMap) =>
   Object.entries(tagCount).sort((a, b) => b[1] - a[1]);
 
 // 推奨結果の算出
-export const createRecommendation = (sortedTags: SortedTagList, topN: number) => {
-  if (sortedTags.length === 0) {
-    return "適した瞑想法が見つかりませんでした。";
-  }
+export const createRecommendation = (sortedTags: SortedTagList, topN: number): MeditationDetail[] => {
+  if (sortedTags.length === 0) return [];
 
-  const topTags = sortedTags.slice(0, topN).map(([tag]) => tag); // タグ名のみ抽出
-  return `おすすめの瞑想法は: ${topTags.join(", ")}`;
+  const topTags = sortedTags.slice(0, topN).map(([tag]) => tag);
+
+  return topTags
+    .map(tag => {
+      const details = MEDITATION_DETAILS[tag];
+      if (!details) return null;
+      return {
+        name: tag,
+        ...details,
+      };
+    })
+    .filter((detail): detail is MeditationDetail => detail !== null);
 };

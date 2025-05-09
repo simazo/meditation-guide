@@ -1,4 +1,5 @@
 import { countTags, sortTagsByCount, createRecommendation } from "../hooks/useQuestion";
+import { MEDITATION_DETAILS } from "../constants/meditationDetails";
 
 // モックデータ
 jest.mock("../../data/questions", () => ({
@@ -37,11 +38,14 @@ describe("createRecommendation", () => {
       ["姿勢", 1],
     ];
     const result = createRecommendation(sortedTags, 2);
-    expect(result).toBe("おすすめの瞑想法は: 集中, リラックス");
+    expect(result).toEqual([
+      MEDITATION_DETAILS["集中"],
+      MEDITATION_DETAILS["リラックス"],
+    ]);
   });
 
-  it("タグが空の場合、適切なメッセージを返す", () => {
+  it("タグが空の場合、空配列を返す", () => {
     const result = createRecommendation([], 3);
-    expect(result).toBe("適した瞑想法が見つかりませんでした。");
+    expect(result).toEqual([]);
   });
 });

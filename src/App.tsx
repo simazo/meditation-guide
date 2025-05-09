@@ -18,7 +18,7 @@ const App: React.FC = () => {
     if (isLastQuestion) {
       calcRecommendation();
     }
-  }, [isLastQuestion, calcRecommendation]);
+  }, [isLastQuestion]);
 
   const onAnswer = (questionId: number, answer: boolean) => {
     answerQuestion(questionId, answer);
