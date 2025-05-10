@@ -1,5 +1,5 @@
 import type { MeditationDetail } from "../types/useQuestionResult";
-import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, VStack } from "@chakra-ui/react";
 import RecommendInfoSection from "./RecommendInfoSection";
 
 interface Props {
