@@ -1,4 +1,6 @@
 import type { MeditationDetail } from "../types/useQuestionResult";
+import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import RecommendInfoSection from "./RecommendInfoSection";
 
 interface Props {
   recommendation: MeditationDetail[] | null;
@@ -9,19 +11,17 @@ const Recommendation: React.FC<Props> = ({ recommendation }) => {
     return <p>適した瞑想法が見つかりませんでした。</p>;
   }
   return (
-    <div>
-      <h2>おすすめの瞑想法</h2>
+    <VStack>
       {recommendation.map((item) => (
-        <div key={item.name}>
-          <h3>{item.name}</h3>
-          <p><strong>概要:</strong> {item.description}</p>
-          <p><strong>目的:</strong> {item.purpose}</p>
-          <p><strong>効果:</strong> {item.effect}</p>
-          <p><strong>方法:</strong> {item.method}</p>
-          <hr />
-        </div>
+        <Box key={item.name} p={4} borderWidth="1px" borderRadius="2xl" boxShadow="lg" bg="gray.50">
+          <Box width="100%" textAlign="center"><Heading size="3xl" color="teal.600" >{item.name}</Heading></Box>
+          <RecommendInfoSection title="概要" content={item.description} />
+          <RecommendInfoSection title="目的" content={item.purpose} />
+          <RecommendInfoSection title="効果" content={item.effect} />
+          <RecommendInfoSection title="方法" content={item.method} />
+        </Box>
       ))}
-    </div>
+    </VStack>
   );
 };
 

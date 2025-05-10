@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { useQuestion } from "./hooks/useQuestion";
 import Question from "./components/Question";
 import Recommendation from "./components/Recommendation";
-import Progress from "./components/Progress";
+import Progress from "./components/ProgressComponent";
 import type { UseQuestionResult } from "./types/useQuestionResult";
+import { Box, Heading, VStack, Center } from "@chakra-ui/react";
 
 const App: React.FC = () => {
-  const { 
-    currentQuestion, 
-    answerQuestion, 
+  const {
+    currentQuestion,
+    answerQuestion,
     calcRecommendation,
     isLastQuestion,
     recommendation,
@@ -25,18 +26,29 @@ const App: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>瞑想法診断</h1>
-      { <Progress current={currentQuestion?.id || 0} total={20} /> }
-      {currentQuestion ? (
-        <Question 
-          text={currentQuestion.text} 
-          onAnswer={(answer) => onAnswer(currentQuestion.id, answer)} 
-        />
-      ) : (
-        <Recommendation recommendation={recommendation} />
-      )}
-    </div>
+    <Center minHeight="100vh" bg="gray.50" px={4}>
+      <Box w="full" maxW="lg" bg="white" p={6} rounded="lg" shadow="md">
+        <VStack align="stretch">
+
+          {currentQuestion?.id ? (
+            <>
+              <Heading as="h1" size="xl" textAlign="center">瞑想法診断</Heading>
+              <Progress current={currentQuestion.id} total={20} />
+              <Question
+                text={currentQuestion.text}
+                onAnswer={(answer) => onAnswer(currentQuestion.id, answer)}
+              />
+            </>
+          ) : (
+            <>
+              <Heading as="h1" size="xl" textAlign="center">あたなにおすすめの瞑想法</Heading>
+              <Heading as="h2" size="sm" textAlign="center">おすすめ順に表示してます</Heading>
+              <Recommendation recommendation={recommendation} />
+            </>
+          )}
+        </VStack>
+      </Box>
+    </Center>
   );
 };
 
