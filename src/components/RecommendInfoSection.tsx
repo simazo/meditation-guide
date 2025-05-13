@@ -11,7 +11,7 @@ const RecommendInfoSection: React.FC<RecommendInfoSectionProps> = ({ title, cont
       <Heading size="xl" alignItems="center" color="teal.600" >
         {title}
       </Heading>
-      <Text letterSpacing="wide">
+      <Text letterSpacing="wide" whiteSpace="pre-line">
         {content}
       </Text>
     </Box>
