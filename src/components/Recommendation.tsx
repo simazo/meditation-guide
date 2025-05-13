@@ -8,10 +8,12 @@ interface Props {
 
 const Recommendation: React.FC<Props> = ({ recommendation }) => {
   if (!recommendation || recommendation.length === 0) {
-    return <p>適した瞑想法が見つかりませんでした。</p>;
+    return <Heading as="h2" size="sm" textAlign="center">ごめんなさい。適した瞑想法が見つかりませんでした。</Heading>;
   }
   return (
     <VStack>
+      <Heading as="h1" size="xl" textAlign="center">あなたにおすすめの瞑想法</Heading>
+      <Heading as="h2" size="sm" textAlign="center">おすすめ順に表示してます</Heading>
       {recommendation.map((item) => (
         <Box key={item.name} p={4} borderWidth="1px" borderRadius="2xl" boxShadow="lg" bg="gray.50">
           <Box width="100%" textAlign="center"><Heading size="3xl" color="teal.600" >{item.name}</Heading></Box>

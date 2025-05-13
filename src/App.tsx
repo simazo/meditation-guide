@@ -41,8 +41,6 @@ const App: React.FC = () => {
             </>
           ) : (
             <>
-              <Heading as="h1" size="xl" textAlign="center">あたなにおすすめの瞑想法</Heading>
-              <Heading as="h2" size="sm" textAlign="center">おすすめ順に表示してます</Heading>
               <Recommendation recommendation={recommendation} />
             </>
           )}
